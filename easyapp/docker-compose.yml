@@ -11,18 +11,16 @@ services:
     volumes:
       - ./client:/usr/src/app
     tty: true
-  # server:
-  #   build: 
-  #     context: ./server
-  #     dockerfile: Dockerfile
-  #   container_name: vgs-server
-  #   ports: 
-  #     - 8000:8000
-  #   volumes: 
-  #     - ./server:/go/src/github.com/aocm/vue-go-spa-sample
-  #   depends_on: 
-  #    - 'db'
-  #   tty: true
+  server:
+    build: 
+      context: ./server
+      dockerfile: Dockerfile
+    container_name: vgs-server
+    ports: 
+      - 8000:8000
+    volumes: 
+      - ./server:/go/src/server
+    tty: true
   # db:
   #   build:
   #     context: ./db
