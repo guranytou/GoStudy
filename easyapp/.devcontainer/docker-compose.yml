@@ -1,0 +1,13 @@
+version: '3.3'
+
+services: 
+  client:
+    build: 
+      context: ./client
+      dockerfile: Dockerfile
+    container_name: vgs-client
+    ports: 
+      - 8080:8080
+    volumes:
+      - ./client:/usr/src/app
+    tty: true

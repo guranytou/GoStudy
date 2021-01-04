@@ -1,0 +1,39 @@
+version: '3.3'
+
+services: 
+  client:
+    build: 
+      context: ./client
+      dockerfile: Dockerfile
+    container_name: vgs-client
+    ports: 
+      - 8080:8080
+    volumes:
+      - ./client:/usr/src/app
+    tty: true
+  # server:
+  #   build: 
+  #     context: ./server
+  #     dockerfile: Dockerfile
+  #   container_name: vgs-server
+  #   ports: 
+  #     - 8000:8000
+  #   volumes: 
+  #     - ./server:/go/src/github.com/aocm/vue-go-spa-sample
+  #   depends_on: 
+  #    - 'db'
+  #   tty: true
+  # db:
+  #   build:
+  #     context: ./db
+  #     dockerfile: Dockerfile
+  #   container_name: vgs-db
+  #   environment:
+  #     - MYSQL_DATABASE=${DB_NAME}
+  #     - MYSQL_USER=${DB_USER}
+  #     - MYSQL_PASSWORD=${DB_PASS}
+  #     - MYSQL_ROOT_PASSWORD=${DB_PASS}
+  #     - TZ=${TZ}
+  #   volumes:
+  #     - ./db/mysql-store:/var/lib/mysql
+  #     - ./db/mysql-logs:/var/log/mysql
