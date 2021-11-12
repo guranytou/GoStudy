@@ -2,9 +2,8 @@ FROM golang:1.17.2-buster
 
 WORKDIR /go/src/github.com/guranytou/curl-API
 
-COPY . .
+COPY go.mod main.go ./
 RUN go mod download
+EXPOSE 8000
 
-RUN go get -u github.com/cosmtrek/air
-
-CMD ["air", "-c", ".air.toml"]
+CMD ["go", "run", "main.go"]
