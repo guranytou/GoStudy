@@ -49,7 +49,7 @@ func main() {
 }
 
 func tenki(city string) {
-	token := "7cb2eee4863ef064326ec2d60935fa1b"
+	token := ""
 	endPoint := "https://api.openweathermap.org/data/2.5/weather"
 
 	values := url.Values{}
