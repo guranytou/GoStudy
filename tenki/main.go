@@ -11,6 +11,7 @@ import (
 	"os"
 	"time"
 
+	"github.com/joho/godotenv"
 	"github.com/urfave/cli/v2"
 )
 
@@ -49,17 +50,21 @@ func main() {
 }
 
 func tenki(city string) {
-	token := ""
-	endPoint := "https://api.openweathermap.org/data/2.5/weather"
+	err := godotenv.Load(".env") // envファイルのパスを渡す。何も渡さないと、どうディレクトリにある、.envファイルを探す
+	if err != nil {
+		panic("Error loading .env file")
+	}
+	token := os.Getenv("API_TOKEN")
 
 	values := url.Values{}
 	values.Set("APPID", token)
-
 	if city == "" {
 		values.Set("q", "tokyo,jp")
 	} else {
 		values.Set("q", city)
 	}
+
+	endPoint := "https://api.openweathermap.org/data/2.5/weather"
 
 	resp, err := http.Get(endPoint + "?" + values.Encode())
 	if err != nil {
