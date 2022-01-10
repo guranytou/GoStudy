@@ -38,8 +38,7 @@ func main() {
 	app.Version = "0.0.1"
 
 	app.Action = func(c *cli.Context) error {
-		city := c.Args().Get(0)
-		tenki(city)
+		tenki(c.Args().Get(0))
 		return nil
 	}
 
