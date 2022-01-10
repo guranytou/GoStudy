@@ -50,7 +50,7 @@ func main() {
 }
 
 func tenki(city string) {
-	err := godotenv.Load(".env") // envファイルのパスを渡す。何も渡さないと、どうディレクトリにある、.envファイルを探す
+	err := godotenv.Load(".env")
 	if err != nil {
 		panic("Error loading .env file")
 	}
