@@ -24,10 +24,10 @@ func main() {
 		for scanner.Scan() {
 			if *n == true {
 				fmt.Println(t, scanner.Text())
+				t++
 			} else {
 				fmt.Println(scanner.Text())
 			}
-			t++
 		}
 		if err := scanner.Err(); err != nil {
 			fmt.Fprintln(os.Stderr, "読み込みに失敗しました", err)
