@@ -13,17 +13,28 @@ var (
 	outputFileType string
 )
 
+type ConvImage struct {
+	InputFileType  string
+	OutputFileType string
+	SrcPath        string
+	DirPath        string
+}
+
 func main() {
-	flag.StringVar(&inputFileType, "e", "jpeg", "入力ファイルの形式を指定する")
-	flag.StringVar(&outputFileType, "o", "png", "出力ファイルの形式を指定する")
+	cmd := new(ConvImage)
+	flag.StringVar(&cmd.InputFileType, "e", "jpeg", "入力ファイルの形式を指定する")
+	flag.StringVar(&cmd.OutputFileType, "o", "png", "出力ファイルの形式を指定する")
 	flag.Parse()
 
-	fileTypeCheck(inputFileType)
-	fileTypeCheck(outputFileType)
-	dirCheck(flag.Arg(0))
-	dirCheck(flag.Arg(1))
+	cmd.SrcPath = flag.Arg(0)
+	cmd.DirPath = flag.Arg(1)
 
-	err := imageconvert.Convert(inputFileType, outputFileType, flag.Arg(0), flag.Arg(1))
+	fileTypeCheck(cmd.InputFileType)
+	fileTypeCheck(cmd.OutputFileType)
+	dirCheck(cmd.SrcPath)
+	dirCheck(cmd.DirPath)
+
+	err := imageconvert.Convert(cmd.InputFileType, cmd.OutputFileType, cmd.SrcPath, cmd.DirPath)
 	if err != nil {
 		fmt.Println("Err:", err)
 	}
