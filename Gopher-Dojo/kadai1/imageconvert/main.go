@@ -12,6 +12,7 @@ import (
 	"strings"
 )
 
+// 渡された拡張子がこのパッケージで対応しているものか確認します
 func FileTypeCheck(filetype string) error {
 	switch filetype {
 	case "jpeg", "png", "jpg", "gif":
@@ -21,6 +22,7 @@ func FileTypeCheck(filetype string) error {
 	}
 }
 
+// 渡されたディレクトリが存在しているか確認します
 func DirCheck(dir string) error {
 	if _, err := os.Stat(dir); err != nil {
 		return errors.New("指定されたディレクトリは存在しません")
@@ -28,6 +30,7 @@ func DirCheck(dir string) error {
 	return nil
 }
 
+// 指定されたディレクトリを再帰的に確認し、特定の拡張子のファイルをリスト化します
 func getFilePathList(path string, filetype string) ([]string, error) {
 	var fileList []string
 	err := filepath.Walk(path, func(path string, info os.FileInfo, err error) error {
@@ -51,6 +54,7 @@ func getFilePathList(path string, filetype string) ([]string, error) {
 	return fileList, nil
 }
 
+// リスト化されたファイルを、指定された拡張子に変換します
 func Convert(inputFileType string, outputFileType string, srcPath string, dirPath string) error {
 	fileList, err := getFilePathList(srcPath, inputFileType)
 	if err != nil {
@@ -67,6 +71,7 @@ func Convert(inputFileType string, outputFileType string, srcPath string, dirPat
 			return errors.New("ファイルが開けませんでした")
 		}
 
+		// 出力するファイルパスを生成します
 		basename := filepath.Base(fileName[:len(fileName)-len(filepath.Ext(fileName))]) + "." + outputFileType
 		filePathName := filepath.Join(dirPath, basename)
 
