@@ -2,11 +2,12 @@ package main
 
 import (
 	"fmt"
+	"math"
 )
 
 func main() {
-	var a, b int
-	fmt.Scanf("%d %d", &a, &b)
+	var r float64
+	fmt.Scanf("%f", &r)
 
-	fmt.Printf("%d %d %f", a/b, a%b, float64(a)/float64(b))
+	fmt.Printf("%f %f", r*r*math.Pi, r*2*math.Pi)
 }

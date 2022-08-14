@@ -2,12 +2,23 @@ package main
 
 import (
 	"fmt"
-	"math"
 )
 
 func main() {
-	var r float64
-	fmt.Scanf("%f", &r)
-
-	fmt.Printf("%f %f", r*r*math.Pi, r*2*math.Pi)
+	var a, b int
+	var op string
+	for {
+		fmt.Scanf("%d %s %d", &a, &op, &b)
+		if op == "+" {
+			fmt.Println(a + b)
+		} else if op == "-" {
+			fmt.Println(a - b)
+		} else if op == "*" {
+			fmt.Println(a * b)
+		} else if op == "/" {
+			fmt.Println(a / b)
+		} else if op == "?" {
+			break
+		}
+	}
 }
