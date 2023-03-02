@@ -1,8 +1,6 @@
 package main
 
-import (
-	"testing"
-)
+import "testing"
 
 func TestSearch(t *testing.T) {
 	dictionary := Dictionary{"test": "this is just a test"}
@@ -10,7 +8,6 @@ func TestSearch(t *testing.T) {
 	t.Run("known word", func(t *testing.T) {
 		got, _ := dictionary.Search("test")
 		want := "this is just a test"
-
 		assertStrings(t, got, want)
 	})
 
@@ -22,14 +19,13 @@ func TestSearch(t *testing.T) {
 
 func TestAdd(t *testing.T) {
 	t.Run("new word", func(t *testing.T) {
-		dictionary := Dictionary{}
+		dictonary := Dictionary{}
 		word := "test"
 		definition := "this is just a test"
 
-		err := dictionary.Add(word, definition)
+		dictonary.Add("test", "this is just a test")
 
-		assertError(t, err, nil)
-		assertDefinition(t, dictionary, word, definition)
+		assertDefinition(t, dictonary, word, definition)
 	})
 
 	t.Run("existing word", func(t *testing.T) {
@@ -47,21 +43,20 @@ func TestUpdate(t *testing.T) {
 	t.Run("existing word", func(t *testing.T) {
 		word := "test"
 		definition := "this is just a test"
+		dictionary := Dictionary{word: definition}
 		newDefinition := "new definition"
-		dictonary := Dictionary{word: definition}
 
-		err := dictonary.Update(word, newDefinition)
+		err := dictionary.Update(word, newDefinition)
 
 		assertError(t, err, nil)
-		assertDefinition(t, dictonary, word, newDefinition)
+		assertDefinition(t, dictionary, word, newDefinition)
 	})
-
 	t.Run("new word", func(t *testing.T) {
 		word := "test"
 		definition := "this is just a test"
-		dictonary := Dictionary{}
+		dictionary := Dictionary{}
 
-		err := dictonary.Update(word, definition)
+		err := dictionary.Update(word, definition)
 
 		assertError(t, err, ErrWordDoesNotExist)
 	})
@@ -69,31 +64,28 @@ func TestUpdate(t *testing.T) {
 
 func TestDelete(t *testing.T) {
 	word := "test"
-	dictonary := Dictionary{word: "test definition"}
+	dictionary := Dictionary{word: "test definition"}
 
-	dictonary.Delete(word)
+	dictionary.Delete(word)
 
-	_, err := dictonary.Search(word)
+	_, err := dictionary.Search(word)
 	if err != ErrNotFound {
-		t.Errorf("Expected %q tobe deleted", word)
+		t.Errorf("Expected %q to be deleted", word)
 	}
 }
 
 func assertStrings(t *testing.T, got, want string) {
 	t.Helper()
-
 	if got != want {
-		t.Errorf("got %q want %q given, %q", got, want, "test")
+		t.Errorf("got %q want %q", got, want)
 	}
 }
 
 func assertError(t *testing.T, got, want error) {
 	t.Helper()
-
 	if got != want {
 		t.Errorf("got %q want %q", got, want)
 	}
-
 	if got == nil {
 		if want == nil {
 			return
@@ -109,6 +101,7 @@ func assertDefinition(t *testing.T, dictionary Dictionary, word, definition stri
 	if err != nil {
 		t.Fatal("should find added word:", err)
 	}
+
 	if definition != got {
 		t.Errorf("got %q want %q", got, definition)
 	}

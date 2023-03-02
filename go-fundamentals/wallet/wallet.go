@@ -7,12 +7,16 @@ import (
 
 type Bitcoin int
 
+type Wallet struct {
+	balance Bitcoin
+}
+
 type Stringer interface {
 	String() string
 }
 
-type Wallet struct {
-	balance Bitcoin
+func (b Bitcoin) String() string {
+	return fmt.Sprintf("%d BTC", b)
 }
 
 func (w *Wallet) Deposit(amount Bitcoin) {
@@ -23,11 +27,7 @@ func (w *Wallet) Balance() Bitcoin {
 	return w.balance
 }
 
-func (b Bitcoin) String() string {
-	return fmt.Sprintf("%d BTC", b)
-}
-
-var ErrInsufficientFunds = errors.New("cannot withdraw, insufficient funds")
+var ErrInsufficientFunds = errors.New("connot withdraw, insufficient funds")
 
 func (w *Wallet) Withdraw(amount Bitcoin) error {
 	if amount > w.balance {

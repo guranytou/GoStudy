@@ -10,7 +10,7 @@ func TestRepeat(t *testing.T) {
 	expected := "aaaaa"
 
 	if repeated != expected {
-		t.Errorf("expected %q but got %q", repeated, expected)
+		t.Errorf("expected %q but got %q", expected, repeated)
 	}
 }
 
@@ -21,8 +21,7 @@ func BenchmarkRepeat(b *testing.B) {
 }
 
 func ExampleRepeat() {
-	repeated := Repeat("a", 10)
-	fmt.Println(repeated)
-
-	// Output: aaaaaaaaaa
+	repeted := Repeat("b", 3)
+	fmt.Println(repeted)
+	// Output: bbb
 }
