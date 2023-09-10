@@ -27,23 +27,23 @@ func main() {
 func caesar_cipher(str string, n int) string {
 	convert := make([]string, len(str))
 	for i := 0; i < len(str); i++ {
-		var r rune
+		var b byte
 		if str[i] >= 'A' && str[i] <= 'Z' {
 			if rune(str[i])+rune(n) > 'Z' {
-				r = 'A' + (rune(str[i]) + rune(n) - 'Z') - 1
+				b = 'A' + (str[i] + byte(n) - 'Z') - 1
 			} else {
-				r = rune(str[i]) + rune(n)
+				b = str[i] + byte(n)
 			}
 		} else if str[i] >= 'a' && str[i] <= 'z' {
 			if rune(str[i])+rune(n) > 'z' {
-				r = 'a' + (rune(str[i]) + rune(n) - 'z') - 1
+				b = 'a' + (str[i] + byte(n) - 'z') - 1
 			} else {
-				r = rune(str[i]) + rune(n)
+				b = str[i] + byte(n)
 			}
 		} else {
-			r = rune(str[i])
+			b = str[i]
 		}
-		convert[i] = string(r)
+		convert[i] = string(b)
 	}
 	return strings.Join(convert, "")
 }
