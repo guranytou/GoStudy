@@ -17,28 +17,28 @@ func main() {
 
 	s := rand.NewSource(time.Now().UnixNano())
 	r := rand.New(s)
-	n := r.Intn(25)
+	n := byte(r.Intn(25))
 
 	convert := caesar_cipher(str, n)
 
 	fmt.Println(str, "を", n, "文字ずらすと", convert)
 }
 
-func caesar_cipher(str string, n int) string {
+func caesar_cipher(str string, n byte) string {
 	convert := make([]string, len(str))
 	for i := 0; i < len(str); i++ {
 		var b byte
 		if str[i] >= 'A' && str[i] <= 'Z' {
-			if rune(str[i])+rune(n) > 'Z' {
-				b = 'A' + (str[i] + byte(n) - 'Z') - 1
+			if str[i]+n > 'Z' {
+				b = 'A' + (str[i] + n - 'Z') - 1
 			} else {
-				b = str[i] + byte(n)
+				b = str[i] + n
 			}
 		} else if str[i] >= 'a' && str[i] <= 'z' {
-			if rune(str[i])+rune(n) > 'z' {
-				b = 'a' + (str[i] + byte(n) - 'z') - 1
+			if str[i]+n > 'z' {
+				b = 'a' + (str[i] + n - 'z') - 1
 			} else {
-				b = str[i] + byte(n)
+				b = str[i] + n
 			}
 		} else {
 			b = str[i]
