@@ -17,7 +17,7 @@ func main() {
 
 	s := rand.NewSource(time.Now().UnixNano())
 	r := rand.New(s)
-	n := byte(r.Intn(25))
+	n := byte(r.Intn(26))
 
 	convert := caesar_cipher(str, n)
 
